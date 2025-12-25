@@ -1,0 +1,40 @@
+{
+  "name": "vfront",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "exports": {
+    "import": "index.js"
+  },
+  "author": "devvime",
+  "license": "MIT",
+  "keywords": [
+    "spa",
+    "routes",
+    "signal",
+    "reactive-proxy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devvime/vfront.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devvime/vfront/issues"
+  },
+  "homepage": "https://github.com/devvime/vfront#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.97.1",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "navigo": "^8.11.1"
+  }
+}
