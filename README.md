@@ -5,7 +5,7 @@ Simple SPA with Signals.
 ### Install
 
 ```bash
-npm i vfront
+npm i vfront-lib
 ```
 
 index.html
