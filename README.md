@@ -39,7 +39,7 @@ Structure
 ```
 
 ```js
-import { Render, $this } from "vfront";
+import { Render, $this } from "vfront-lib";
 
 export default function Home(params) {
   // Render(htmlFileUniqueName, objectSignal)
@@ -72,7 +72,7 @@ export default {
 ### Start app
 
 ```js
-import { App } from 'vfront';
+import { App } from 'vfront-lib';
 import routes from './routes';
 
 App(routes);
