@@ -36,18 +36,25 @@ Structure
 │   │   │   ├── home.html
 │   │   │   ├── home.scss
 │   │   │   └── home.ts
+│   │   ├── contact/
+│   │   │   ├── contact.html
+│   │   │   ├── contact.scss
+│   │   │   └── contact.ts
 ```
 
 ```js
-import { Render, $this } from "vfront-lib";
+import { Render } from "vfront-lib";
+import Contact from "../contact/contact";
 
 export default function Home(params) {
   // Render(htmlFileUniqueName, objectSignal)
-  Render('home', {
-    name: 'Steve',
+  return Render('home', {
+    imports: [Contact], // import contact component
+    start() { },
+    name: 'Victor',
     count: 0,
-    setCount: () => {
-      $this.count += 1;
+    setCount() {
+      this.count += 1;
     }
   });
 }
@@ -56,7 +63,9 @@ export default function Home(params) {
 ```html
 <h1>Hello {{name}}.</h1>
 <p>Count: {{count}}</p>
-<button onclick="$this.setCount()">Click here</button>
+<button onclick="home.setCount()">Click here</button>
+
+<contact></contact>
 ```
 
 ### Create route
