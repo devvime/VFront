@@ -6,10 +6,11 @@ import { CreateElement } from "./dom";
 
 const app = document.getElementById('app');
 
-export let $this = null;
-export let $app = null;
-
 export const Router = new Navigo("/", { hash: true });
+
+export function App(routes) {
+  Router.on(routes).resolve();
+}
 
 export function Render(name, data = {}) {
   const element = Templates.find(t => t.path.includes(name))?.html;
@@ -20,19 +21,42 @@ export function Render(name, data = {}) {
   }
 
   const template = Handlebars.compile(element);
+  const tpl = (values => CreateElement(`<div><style>${style}</style>${template(values)}</div>`));
 
-  const tpl = (values => CreateElement(`<${name}><style>${style}</style>${template(values)}</${name}>`));
+  const target = app.querySelectorAll(name);
 
-  window.$this = Signal(data, (values) => {
+  if (target.length > 0) {
+    const component = Signal(data, (values) => {
+      app.querySelectorAll(name).forEach(item => {
+        item.replaceChildren(tpl(values));
+      });
+      if (values.start && !window[name]) {
+        values.start();
+      }
+      if (values.imports && values.imports.length > 0) {
+        values.imports.forEach(a => a());
+      }
+    });
+
+    window[name] = component;
+    return component;
+  }
+
+  const component = Signal(data, (values) => {
     app.replaceChildren(tpl(values));
-    window; $app = app;
+    Signal(data, (values) => {
+      app.querySelectorAll(name).forEach(item => {
+        item.replaceChildren(tpl(values));
+      });
+      if (values.start && !window[name]) {
+        values.start();
+      }
+      if (values.imports && values.imports.length > 0) {
+        values.imports.forEach(a => a());
+      }
+    });
   });
 
-  $this = window.$this;
-  $app = window.$app;
-
-}
-
-export function App(routes) {
-  Router.on(routes).resolve();
+  window[name] = component;
+  return component;
 }

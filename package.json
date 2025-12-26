@@ -26,7 +26,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "create": "node ./src/lib/vfront.js"
   },
   "devDependencies": {
     "sass-embedded": "^1.97.1",
